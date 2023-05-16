@@ -1,0 +1,34 @@
+---
+import '../../styles/global.css';
+import MainWithNavigation from "../../components/template/MainWithNavigation.astro";
+import { format } from "../../modules/formatTitle";
+
+export const getStaticPaths = async () => {
+  const dailyBlogList = await Astro.glob("../../content/**/*.md");
+
+  return dailyBlogList.map((dailyBlog) => ({
+    params: {
+        title: format(dailyBlog.frontmatter.title),
+    },
+    props: {
+        dailyBlog,
+    },
+  }));
+};
+
+const { Content } = Astro.props.dailyBlog;
+const { title } = Astro.props.dailyBlog.frontmatter;
+---
+
+<MainWithNavigation title={title}>
+    <article class="markdown-body">
+      <Content />
+    </article>
+</MainWithNavigation>
+
+
+<style>
+    .markdown-body {
+      margin-top: 3rem;
+    }
+  </style>

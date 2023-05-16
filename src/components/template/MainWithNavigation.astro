@@ -1,0 +1,56 @@
+---
+interface Props {
+    title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{ title } | Daily For Me !!</title>
+</head>
+<body>
+    <nav class="nav">
+        <ul class="nav__list">
+            <li class="nav__list__item">
+                <a class="nav__list__item__link" href="/">TOP</a>
+            </li>
+        </ul>
+    </nav>
+    
+    <main>
+        <slot />
+    </main>
+</body>
+</html>
+
+<style lang="scss">
+    body {
+        margin: 0;
+    }
+
+    main,
+    .nav {
+        width: 80%;
+        margin: 0 auto;
+    }
+
+    .nav {
+        display: flex;
+        
+        &__list {
+            list-style: none;
+
+            &__item {
+                &__link {
+                    color: #333;
+                }
+            }
+        }
+    }
+</style>

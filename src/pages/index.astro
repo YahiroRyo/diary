@@ -1,0 +1,20 @@
+---
+import MainWithNavigation from "../components/template/MainWithNavigation.astro";
+import { format } from "../modules/formatTitle";
+
+const dailyBlogList = await Astro.glob("../content/**/*.md");
+---
+
+<MainWithNavigation title='トップ'>
+	<ul>
+		{
+			dailyBlogList.map(dailyBlog => 
+				<li>
+					<a href={`/${format(dailyBlog.frontmatter.title)}`}>
+						{format(dailyBlog.frontmatter.title)}
+					</a>
+				</li>
+			)
+		}
+	</ul>
+</MainWithNavigation>
