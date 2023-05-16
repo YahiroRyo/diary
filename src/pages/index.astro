@@ -2,16 +2,16 @@
 import MainWithNavigation from "../components/template/MainWithNavigation.astro";
 import { format } from "../modules/formatTitle";
 
-const dailyBlogList = await Astro.glob("../content/**/*.md");
+const diaryBlogList = await Astro.glob("../content/**/*.md");
 ---
 
 <MainWithNavigation title='トップ' description="八尋諒の日記ですです。ウッホーｗｗｗｗ">
 	<ul>
 		{
-			dailyBlogList.map(dailyBlog => 
+			diaryBlogList.map(diaryBlog => 
 				<li>
-					<a href={`/${format(dailyBlog.frontmatter.title)}`}>
-						{format(dailyBlog.frontmatter.title)}
+					<a href={`/${format(diaryBlog.frontmatter.title)}`}>
+						{format(diaryBlog.frontmatter.title)}
 					</a>
 				</li>
 			)

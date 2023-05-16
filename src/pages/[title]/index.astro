@@ -4,20 +4,20 @@ import MainWithNavigation from "../../components/template/MainWithNavigation.ast
 import { format } from "../../modules/formatTitle";
 
 export const getStaticPaths = async () => {
-  const dailyBlogList = await Astro.glob("../../content/**/*.md");
+  const diaryBlogList = await Astro.glob("../../content/**/*.md");
 
-  return dailyBlogList.map((dailyBlog) => ({
+  return diaryBlogList.map((diaryBlog) => ({
     params: {
-        title: format(dailyBlog.frontmatter.title),
+        title: format(diaryBlog.frontmatter.title),
     },
     props: {
-        dailyBlog,
+        diaryBlog,
     },
   }));
 };
 
-const { Content } = Astro.props.dailyBlog;
-const { title } = Astro.props.dailyBlog.frontmatter;
+const { Content } = Astro.props.diaryBlog;
+const { title } = Astro.props.diaryBlog.frontmatter;
 ---
 
 <MainWithNavigation title={title} description={`${format(title)}の日記です。`}>

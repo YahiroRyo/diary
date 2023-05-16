@@ -1,13 +1,13 @@
 import { defineCollection, z } from "astro:content";
 
-const Daily = z.object({
+const Diary = z.object({
   title: z.string(),
 });
 
-export type Daily = { title: string }
+export type Diary = { title: string }
 
-const daily = defineCollection({
-  schema: Daily,
+const diary = defineCollection({
+  schema: Diary,
 });
 
-export const collections = { daily };
+export const collections = { diary };
