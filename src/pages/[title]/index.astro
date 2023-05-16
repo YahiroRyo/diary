@@ -20,7 +20,7 @@ const { Content } = Astro.props.dailyBlog;
 const { title } = Astro.props.dailyBlog.frontmatter;
 ---
 
-<MainWithNavigation title={title}>
+<MainWithNavigation title={title} description={`${format(title)}の日記です。`}>
     <article class="markdown-body">
       <Content />
     </article>
