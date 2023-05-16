@@ -3,10 +3,10 @@ name: CopyToS3
 on:
   push:
     branches:
-      - master
+      - main
   delete:
     branches:
-      - master
+      - main
 
 jobs:
   to_s3:
