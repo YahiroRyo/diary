@@ -3,14 +3,21 @@ import MainWithNavigation from "../components/template/MainWithNavigation.astro"
 import { format } from "../modules/formatTitle";
 
 const diaryBlogList = await Astro.glob("../content/**/*.md");
+
+diaryBlogList.sort((a, b) => {
+	if (new Date(a.frontmatter.title) > new Date(b.frontmatter.title)) {
+		return -1;
+	}
+	return 1;
+});
 ---
 
 <MainWithNavigation title='トップ' description="八尋諒の日記ですです。ウッホーｗｗｗｗ">
-	<ul>
+	<ul class="diary-list">
 		{
 			diaryBlogList.map(diaryBlog => 
-				<li>
-					<a href={`/${format(diaryBlog.frontmatter.title)}`}>
+				<li class="diary-list__item">
+					<a class="diary-list__item__link" href={`/${format(diaryBlog.frontmatter.title)}`}>
 						{format(diaryBlog.frontmatter.title)}
 					</a>
 				</li>
@@ -18,3 +25,34 @@ const diaryBlogList = await Astro.glob("../content/**/*.md");
 		}
 	</ul>
 </MainWithNavigation>
+
+<style lang="scss">
+	.diary-list {
+		list-style: none;
+		width: 100%;
+		display: flex;
+		gap: 2rem;
+		flex-wrap: wrap;
+		
+		&__item {
+			width: 100%;
+			
+			&__link {
+				background-color: #F8F0D7;
+				border-left:4px dotted rgba(0,0,0,.1);
+				border-right:4px dotted rgba(0,0,0,.1);
+				box-shadow:0 0 5px rgba(0,0,0,.2);
+				color: #65513f;
+				display: block;
+				padding: 1em;
+				position: relative;
+				text-decoration: none;
+
+				&:hover {
+					background-color: #e8e0c8;
+				}
+			}
+		}
+	}
+
+</style>

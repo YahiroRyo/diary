@@ -14,7 +14,6 @@ const { title, description } = Astro.props;
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{ title } | Diary For Me !!</title>
-    <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@yappi_chmod_777" />
     <meta name="twitter:creator" content="@yappi_chmod_777" />
     <meta name="twitter:domain" content="https://diary.yappi.jp" />
@@ -31,7 +30,7 @@ const { title, description } = Astro.props;
     <nav class="nav">
         <ul class="nav__list">
             <li class="nav__list__item">
-                <a class="nav__list__item__link" href="/">TOP</a>
+                <a class="nav__list__item__link" href="/">トップページ</a>
             </li>
         </ul>
     </nav>
@@ -55,13 +54,29 @@ const { title, description } = Astro.props;
 
     .nav {
         display: flex;
+        height: 5rem;
+        align-items: center;
         
         &__list {
             list-style: none;
 
             &__item {
                 &__link {
-                    color: #333;
+                    display: inline-block;
+                    background-color: #f8f8f8;
+                    border-radius: .4rem;
+                    box-shadow: 0 .4rem #E4E4E4;
+                    color: #6C7275;
+                    font-weight: bold;                    
+                    padding: 1rem 2rem;
+                    text-decoration: none;
+                    transition: .3s;
+                    transform: translateY(0);
+
+                    &:hover {
+                        transform: translateY(0.3rem);
+                        box-shadow: 0 .1rem #E4E4E4;
+                    }
                 }
             }
         }
