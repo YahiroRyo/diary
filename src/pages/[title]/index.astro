@@ -2,25 +2,30 @@
 import '../../styles/global.css';
 import MainWithNavigation from "../../components/template/MainWithNavigation.astro";
 import { format } from "../../modules/formatTitle";
+import type { MarkdownInstance } from 'astro';
 
 export const getStaticPaths = async () => {
-  const diaryBlogList = await Astro.glob("../../content/**/*.md");
+  const diaryBlogList = await Astro.glob<{title: string}>("../../content/**/*.md");
 
   return diaryBlogList.map((diaryBlog) => ({
     params: {
-        title: format(diaryBlog.frontmatter.title),
+      title: format(diaryBlog.frontmatter.title),
     },
     props: {
-        diaryBlog,
+      diaryBlog,
     },
   }));
 };
 
-const { Content } = Astro.props.diaryBlog;
+const { Content, rawContent } = Astro.props.diaryBlog as MarkdownInstance<{title: string}>;
 const { title } = Astro.props.diaryBlog.frontmatter;
+
+const MAX_DESCRIPTION_COUNT = 255;
+const MIN_DESCRIPTION_COUNT = 0;
+const description = rawContent().substring(MIN_DESCRIPTION_COUNT, MAX_DESCRIPTION_COUNT);
 ---
 
-<MainWithNavigation title={format(title)} description={`${format(title)}の日記です。`}>
+<MainWithNavigation title={format(title)} description={description}>
     <article class="markdown-body">
       <Content />
     </article>
